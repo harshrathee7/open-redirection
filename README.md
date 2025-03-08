@@ -153,7 +153,7 @@ If the application has some restrictions, try:
 ### 2. Automated Testing  
 You can automate open redirection testing by combining **ParamSpider** (to find URL parameters) and **Oralyzer** (to test for open redirection).  
 
-# Using ParamSpider to Gather URLs 
+### Using ParamSpider to Gather URLs 
 ```bash
 git clone https://github.com/devanshbatham/paramspider.git
 cd paramspider
@@ -192,7 +192,7 @@ nuclei -ut && nuclei -tl | grep redirect
 
 ---
 
-##  Real-World Open Redirect Exploits
+###  Real-World Open Redirect Exploits
 ###  1. PayPal Open Redirect (2014)
 - Attackers used PayPal's redirection feature to phish users.
 - Users received emails with:
@@ -206,7 +206,7 @@ nuclei -ut && nuclei -tl | grep redirect
 
 ---
 
-### Mitigation**  
+### Mitigation
 To prevent open redirection vulnerabilities:  
 - Validate redirect URLs and allow only trusted domains.  
 - Implement allowlists for redirects (e.g., same-origin policy).  
