@@ -94,10 +94,10 @@ exit();
 
 ---
 
-# 1. Manual Testing**  
+### 1. Manual Testing**  
 You can manually test for open redirection by manipulating parameters in URLs that handle redirection.
 
-# Common Parameters
+#### Common Parameters
 ```
 ?checkout_url={payload}
 ?continue={payload}
@@ -122,7 +122,7 @@ You can manually test for open redirection by manipulating parameters in URLs th
 /redirect/{payload}
 ```
 
-# Basic Payloads to Try 
+#### Basic Payloads to Try 
 Replace the URL parameter with an external malicious domain:  
 - Example 1:
   ```
@@ -133,7 +133,7 @@ Replace the URL parameter with an external malicious domain:
   https://example.com/redirect.php?url=https://evil.com
   ```
 
-# Bypassing Filtering Techniques  
+#### Bypassing Filtering Techniques  
 If the application has some restrictions, try:  
 - Using URL encoding:
   ```
@@ -150,7 +150,7 @@ If the application has some restrictions, try:
 
 ---
 
-# 2. Automated Testing  
+### 2. Automated Testing  
 You can automate open redirection testing by combining **ParamSpider** (to find URL parameters) and **Oralyzer** (to test for open redirection).  
 
 # Using ParamSpider to Gather URLs 
