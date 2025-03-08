@@ -88,6 +88,30 @@ exit();
 - Use `X-Frame-Options` and `Referrer-Policy` to prevent abuse.
 
 ---
+### Common Parameters
+```
+?checkout_url={payload}
+?continue={payload}
+?dest={payload}
+?destination={payload}
+?go={payload}
+?image_url={payload}
+?next={payload}
+?redir={payload}
+?redirect_uri={payload}
+?redirect_url={payload}
+?redirect={payload}
+?return_path={payload}
+?return_to={payload}
+?return={payload}
+?returnTo={payload}
+?rurl={payload}
+?target={payload}
+?url={payload}
+?view={payload}
+/{payload}
+/redirect/{payload}
+```
 
 ## 4️ Detecting Open Redirects in Web Applications
 ###  Manual Testing
