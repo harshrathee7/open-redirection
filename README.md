@@ -88,7 +88,16 @@ exit();
 - Use `X-Frame-Options` and `Referrer-Policy` to prevent abuse.
 
 ---
-### Common Parameters
+
+
+## How to test open redirection vulnerability 
+
+---
+
+# 1. Manual Testing**  
+You can manually test for open redirection by manipulating parameters in URLs that handle redirection.
+
+# Common Parameters
 ```
 ?checkout_url={payload}
 ?continue={payload}
@@ -113,25 +122,73 @@ exit();
 /redirect/{payload}
 ```
 
-## 4️ Detecting Open Redirects in Web Applications
-###  Manual Testing
-1. Identify URL parameters handling redirection (`url`, `next`, `redirect`).  
-2. Test with different values:
-   ```
-   https://example.com/redirect.php?url=https://evil.com
-   ```
-3. If it redirects, it's vulnerable.
+# Basic Payloads to Try 
+Replace the URL parameter with an external malicious domain:  
+- Example 1:
+  ```
+  https://example.com/login?next=http://evil.com
+  ```
+- Example 2:  
+  ```
+  https://example.com/redirect.php?url=https://evil.com
+  ```
 
-###  Automated Tools
-- Burp Suite: Use "Open Redirect" scanner.
-- Nuclei: Run Open Redirect templates:
-  ```sh
-  nuclei -t http/open-redirect.yaml -u https://example.com
+# Bypassing Filtering Techniques  
+If the application has some restrictions, try:  
+- Using URL encoding:
   ```
-- Google Dorking:
+  https://example.com/redirect.php?url=%68%74%74%70%3a%2f%2fevil.com
   ```
-  inurl:"redirect.php?url="
+- Using `//` to force a redirect:  
   ```
+  https://example.com/redirect.php?url=//evil.com
+  ```
+- Using nested redirects:
+  ```
+  https://example.com/redirect.php?url=https://trusted.com@evil.com
+  ```
+
+---
+
+# 2. Automated Testing  
+You can automate open redirection testing by combining **ParamSpider** (to find URL parameters) and **Oralyzer** (to test for open redirection).  
+
+# Using ParamSpider to Gather URLs 
+```bash
+git clone https://github.com/devanshbatham/paramspider.git
+cd paramspider
+pip install -r requirements.txt
+python3 paramspider.py --domain example.com
+```
+
+#### Using Oralyzer to Detect Open Redirects  
+```bash
+git clone https://github.com/r0075h3ll/Oralyzer.git
+cd Oralyzer
+pip install -r requirements.txt
+python3 oralyzer.py -l urls.txt
+```
+
+Alternatively, you can use **Burp Suite Intruder** or **Nuclei** with an open redirection template.
+
+---
+
+### 3. Using Nuclei for Automated Scanning  
+```bash
+nuclei -u "https://example.com?redirect=evil.com" -t open-redirect.yaml
+```
+Get open redirect templates:  
+```bash
+nuclei -ut && nuclei -tl | grep redirect
+```
+
+---
+
+### 4. Testing with Burp Suite
+- **Use Burp Proxy** to intercept requests.  
+- **Modify the redirect parameter** with an external domain.  
+- **Check if it redirects to an external site** without validation.
+
 
 ---
 
@@ -149,9 +206,13 @@ exit();
 
 ---
 
-## Conclusion
--> Open Redirect vulnerabilities are often ignored but dangerous.  
--> Attackers exploit them for phishing, security bypasses, and OAuth token theft.  
--> Always validate URLs before redirection to prevent abuse.  
+### Mitigation**  
+To prevent open redirection vulnerabilities:  
+- Validate redirect URLs and allow only trusted domains.  
+- Implement allowlists for redirects (e.g., same-origin policy).  
+- Use relative URLs instead of full URLs for redirection.  
+- Encode and sanitize user inputs properly.  
+
+
 
 ---
