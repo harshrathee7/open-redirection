@@ -157,9 +157,9 @@ You can automate open redirection testing by combining **ParamSpider** (to find 
 ```bash
 Note: Use python 3.7+
 
- git clone https://github.com/0xKayala/ParamSpider
- cd ParamSpider
- pip3 install -r requirements.txt
+git clone https://github.com/0xKayala/ParamSpider
+cd ParamSpider
+pip3 install -r requirements.txt
 python3 paramspider.py --domain hackerone.com
 
 ```
