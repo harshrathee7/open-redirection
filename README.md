@@ -155,10 +155,13 @@ You can automate open redirection testing by combining **ParamSpider** (to find 
 
 ### Using ParamSpider to Gather URLs 
 ```bash
-git clone https://github.com/devanshbatham/paramspider.git
-cd paramspider
-pip install -r requirements.txt
-python3 paramspider.py --domain example.com
+Note: Use python 3.7+
+
+ git clone https://github.com/0xKayala/ParamSpider
+ cd ParamSpider
+ pip3 install -r requirements.txt
+python3 paramspider.py --domain hackerone.com
+
 ```
 
 #### Using Oralyzer to Detect Open Redirects  
